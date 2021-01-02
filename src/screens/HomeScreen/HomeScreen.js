@@ -4,85 +4,86 @@ import React from "react";
 import { createBrowserHistory } from "history";
 import { Header } from  "./style.js";
 import { Image, Grid, GridColumn, GridRow } from "semantic-ui-react";
-
+import {Products} from "../../products.json";
 // TODO: setar imagens e redirecionamentos
 
 export const HomeScreen = () => {
     const history = createBrowserHistory();
-    const products = [
-        {
-            "id": "1",
-            "name":"Produto",
-            "price":"12",
-            "img":"link-to-img"
-        },
-        {
-            "id": "2",
-            "name":"Produto 2",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "3",
-            "name":"Produto 3",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "4",
-            "name":"Produto 4",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "5",
-            "name":"Produto 5",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "6",
-            "name":"Produto 6",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "7",
-            "name":"Produto 7",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "8",
-            "name":"Produto 8",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "9",
-            "name":"Produto 9",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "10",
-            "name":"Produto 10",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "11",
-            "name":"Produto 10",
-            "price":"13",
-            "img":"link-to-img"
-        },
-        {
-            "id": "12",
-            "name":"Produto 10",
-            "price":"13",
-            "img":"link-to-img"
-        }
-    ]
+     const products = Products;
+    //  [
+    //     {
+    //         "id": "1",
+    //         "name":"Produto",
+    //         "price":"12",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "2",
+    //         "name":"Produto 2",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "3",
+    //         "name":"Produto 3",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "4",
+    //         "name":"Produto 4",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "5",
+    //         "name":"Produto 5",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "6",
+    //         "name":"Produto 6",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "7",
+    //         "name":"Produto 7",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "8",
+    //         "name":"Produto 8",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "9",
+    //         "name":"Produto 9",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "10",
+    //         "name":"Produto 10",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "11",
+    //         "name":"Produto 10",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     },
+    //     {
+    //         "id": "12",
+    //         "name":"Produto 10",
+    //         "price":"13",
+    //         "img":"link-to-img"
+    //     }
+    // ]
     return(
         <>       
             <Router history={history}>

@@ -1,4 +1,4 @@
-"products":[
+{"Products":[
     {
         "id": "1",
         "name":"Produto",
@@ -10,5 +10,89 @@
         "name":"Produto 2",
         "price":"13",
         "img":"link-to-img"
-    }
-]
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    },
+    {
+        "id": "1",
+        "name":"Produto",
+        "price":"12",
+        "img":"link-to-img"
+    },
+    {
+        "id": "2",
+        "name":"Produto 2",
+        "price":"13",
+        "img":"link-to-img"
+    }  
+]}
