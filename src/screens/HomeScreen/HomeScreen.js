@@ -32,8 +32,8 @@ export const HomeScreen = () => {
         <>
             <NavBar/>
             <Switch key={1}>
-                <Route exact path="/"  render={()=><div>home</div>} />
-                <Route exact path="/orders"  render={()=><ProductList products={products}/>}/>
+                <Route exact path="/"  render={()=><ProductList products={products}/>} />
+                <Route exact path="/orders"  render={()=><div>Meus pedidos</div>}/>
                 <Route exact path="/user" render={()=><div>user</div>} />
             </Switch>
         </>
