@@ -1,136 +1,75 @@
-import { Link, Route, Router } from "react-router-dom";
+import { BrowserRouter, NavLink, Route, Router, Switch } from "react-router-dom";
 
-import React from "react";
-import { createBrowserHistory } from "history";
-import { Header } from  "./style.js";
-import { Image, Grid, GridColumn, GridRow } from "semantic-ui-react";
+import React, { useState } from "react";
+
+import { Header, DescriptionContainer } from  "./style.js";
+import { Image, Grid, GridColumn, GridRow, Button, Popup } from "semantic-ui-react";
 import {Products} from "../../products.json";
+
 // TODO: setar imagens e redirecionamentos
 
+export const NavBar = () => { 
+    return (
+        <Header>
+            <NavLink to="/" activeClassName="is-active">
+                Home
+            </NavLink>
+            <NavLink to="/orders" activeClassName="is-active">
+                Meus Pedidos
+            </NavLink>
+            <NavLink to="/user"  activeClassName="is-active">
+                Minha Página
+            </NavLink>
+        </Header>
+    )
+}
+
 export const HomeScreen = () => {
-    const history = createBrowserHistory();
-     const products = Products;
-    //  [
-    //     {
-    //         "id": "1",
-    //         "name":"Produto",
-    //         "price":"12",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "2",
-    //         "name":"Produto 2",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "3",
-    //         "name":"Produto 3",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "4",
-    //         "name":"Produto 4",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "5",
-    //         "name":"Produto 5",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "6",
-    //         "name":"Produto 6",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "7",
-    //         "name":"Produto 7",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "8",
-    //         "name":"Produto 8",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "9",
-    //         "name":"Produto 9",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "10",
-    //         "name":"Produto 10",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "11",
-    //         "name":"Produto 10",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     },
-    //     {
-    //         "id": "12",
-    //         "name":"Produto 10",
-    //         "price":"13",
-    //         "img":"link-to-img"
-    //     }
-    // ]
-    return(
-        <>       
-            <Router history={history}>
-            <Header>
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.o2RveuoedKMcvRAIQXNkRQHaFV%26pid%3DApi&f=1" alt="Logo"></img>
-                <Link to="/" className="link">
-                    Home
-                </Link>
-                
-                <Link to="/orders/" className="link">
-                    Meus Pedidos
-                </Link>
-                <Link to="/user/" className="link">
-                    Página do Usuário
-                </Link>
-            </Header>
-            <Route path="/" component="HomeScreen"/>
-            <Route path="/orders/" component="DivTeste"/>
-            <Route path="/user/" componenent="DivTeste"/> 
-            </Router>
-            <ProductList  products={ products }/>
-            <footer style={{display:"flex", color:"#ccc", justifyContent:"center", alignItems: "center", marginTop: "2rem", position: "relative", bottom: 0, background: "#444",width:"100vw", height:"15vh"}}>
-                © 2021 Luciano Simeão
-            </footer>
+    const products = Products;
+    const [activeRoute, setActiveRoute] = useState(null);
+    
+    return (
+        <>
+            <NavBar/>
+            <Switch key={1}>
+                <Route exact path="/"  render={()=><div>home</div>} />
+                <Route exact path="/orders"  render={()=><ProductList products={products}/>}/>
+                <Route exact path="/user" render={()=><div>user</div>} />
+            </Switch>
         </>
     );
 }
 
-const ProductList = ({ products }) => {
+export const ProductList = ({ products }) => {
 
     const handleItem = (item)=>{
         return(
-            console.log(item)
+            console.log(item)   
         );
     }
     return(
-        <Grid style={{padding: "2rem"}} columns={3} centered={true} celled>
+        <Grid style={{padding: "2rem"}} columns={3} centered={true}>
             {products.map(
                 product =>
-                <GridRow style={{cursor: "pointer"}} onClick={() => handleItem(product)}>
-                    <GridColumn>{product.name}</GridColumn>
-                    <GridColumn>{product.price}</GridColumn>
-                    <GridColumn><Image src={product.img}/></GridColumn>
+                <GridRow centered >
+                    <GridColumn width={2} verticalAlign="middle">
+                        <Image 
+                            style={{cursor: "pointer", width: "13em", height: "15em"}} 
+                            src={product.img} 
+                            onClick={() => handleItem(product)} 
+                        />     
+                        <DescriptionContainer>  
+                            <strong>{product.name}</strong>{" "}
+                            {product.price}
+                            <Popup content='Adicionar ao carrinho' trigger={<Button icon='add'/>} />
+                        </DescriptionContainer>
+                    </GridColumn>
+                    <GridColumn width={8} centered style={{display:"flex", alignItems:"center"}}>
+                        <span style={{textAlign:"justify"}}>{product.description}</span>
+                    </GridColumn>
                 </GridRow>
                 )
             }
         </Grid>
     );
 }
-
