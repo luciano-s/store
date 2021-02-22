@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const Header =  styled.header`
  && {
         display: flex;
@@ -10,7 +11,7 @@ export const Header =  styled.header`
         color: #333;
         .link{
             text-decoration: none;
-            color: #ccc;
+            color: gray;
             padding-right: 8rem;
         }
         
@@ -40,9 +41,39 @@ export const StyledFooter = styled.footer`
 
 export const DescriptionContainer = styled.div`
     &&{
+        // border: 1px solid purple;
         display: flex;
+        align-items: center;
         flex-direction: column;
+        height:100px;
+        width: 100%
     }
 `;
 
 
+export const BookListContainer = styled.div`
+    &&{
+        
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+        padding: 1rem;
+        border: 1px solid black;
+    }
+`;
+
+export const BookContainer = styled.div`
+    &&{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        width: 400px;
+        height: 350px;
+        margin:15px;
+        padding:10px;
+        border:1px solid gray;
+        :hover{
+            transform: scale(1.05);
+        }
+    }
+`;

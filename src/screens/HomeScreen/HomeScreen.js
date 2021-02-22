@@ -2,36 +2,34 @@ import { BrowserRouter, NavLink, Route, Router, Switch } from "react-router-dom"
 
 import React, { useState } from "react";
 
-import { Header, DescriptionContainer } from  "./style.js";
-import { Image, Grid, GridColumn, GridRow, Button, Popup } from "semantic-ui-react";
+import { BookContainer, BookListContainer, DescriptionContainer, Header } from  "./style.js";
+import { Dropdown, Image, Button, Popup } from "semantic-ui-react";
 import {Products} from "../../products.json";
 
-// TODO: setar imagens e redirecionamentos
 
 export const NavBar = () => { 
     return (
         <Header>
-            <NavLink to="/" activeClassName="is-active">
-                Home
+            <NavLink to="/">
+                <h1 style={{color:"gray"}}>BookStore</h1>
             </NavLink>
-            <NavLink to="/orders" activeClassName="is-active">
+            <NavLink to="/orders" className="link">
                 Meus Pedidos
             </NavLink>
-            <NavLink to="/user"  activeClassName="is-active">
+            <NavLink to="/user"  className="link">
                 Minha Página
             </NavLink>
         </Header>
-    )
+    );
 }
 
 export const HomeScreen = () => {
     const products = Products;
-    const [activeRoute, setActiveRoute] = useState(null);
-    
+
     return (
         <>
             <NavBar/>
-            <Switch key={1}>
+            <Switch>
                 <Route exact path="/"  render={()=><ProductList products={products}/>} />
                 <Route exact path="/orders"  render={()=><div>Meus pedidos</div>}/>
                 <Route exact path="/user" render={()=><div>user</div>} />
@@ -42,34 +40,68 @@ export const HomeScreen = () => {
 
 export const ProductList = ({ products }) => {
 
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    const [selectedCategories, setselectedCategories] = useState([]);
+
     const handleItem = (item)=>{
         return(
-            console.log(item)   
+            console.log(selectedProducts)   
         );
     }
+    
+    const options = [
+        { key: 'angular', text: 'Angular', value: 'angular' },
+        { key: 'css', text: 'CSS', value: 'css' },
+        { key: 'design', text: 'Graphic Design', value: 'design' },
+        { key: 'ember', text: 'Ember', value: 'ember' },
+        { key: 'html', text: 'HTML', value: 'html' },
+        { key: 'ia', text: 'Information Architecture', value: 'ia' },
+        { key: 'javascript', text: 'Javascript', value: 'javascript' },
+        { key: 'mech', text: 'Mechanical Engineering', value: 'mech' },
+        { key: 'meteor', text: 'Meteor', value: 'meteor' },
+        { key: 'node', text: 'NodeJS', value: 'node' },
+        { key: 'plumbing', text: 'Plumbing', value: 'plumbing' },
+        { key: 'python', text: 'Python', value: 'python' },
+        { key: 'rails', text: 'Rails', value: 'rails' },
+        { key: 'react', text: 'React', value: 'react' },
+        { key: 'repair', text: 'Kitchen Repair', value: 'repair' },
+        { key: 'ruby', text: 'Ruby', value: 'ruby' },
+        { key: 'ui', text: 'UI Design', value: 'ui' },
+        { key: 'ux', text: 'User Experience', value: 'ux' },
+      ]
+
     return(
-        <Grid style={{padding: "2rem"}} columns={3} centered={true}>
-            {products.map(
-                product =>
-                <GridRow centered >
-                    <GridColumn width={2} verticalAlign="middle">
-                        <Image 
-                            style={{cursor: "pointer", width: "13em", height: "15em"}} 
-                            src={product.img} 
-                            onClick={() => handleItem(product)} 
-                        />     
-                        <DescriptionContainer>  
-                            <strong>{product.name}</strong>{" "}
-                            {product.price}
-                            <Popup content='Adicionar ao carrinho' trigger={<Button icon='add'/>} />
-                        </DescriptionContainer>
-                    </GridColumn>
-                    <GridColumn width={8} centered style={{display:"flex", alignItems:"center"}}>
-                        <span style={{textAlign:"justify"}}>{product.description}</span>
-                    </GridColumn>
-                </GridRow>
-                )
-            }
-        </Grid>
+        <>
+            <Dropdown placeholder='Busca por Categorias' fluid multiple selection options={options} />
+            <BookListContainer>
+                {products.map(
+                    product =>
+                    <BookContainer>    
+                            <Image 
+                                style={{cursor: "pointer", width: "13em", height: "15em"}} 
+                                src={product.img} 
+                                onClick={() => handleItem(product)} 
+                            />     
+                            <DescriptionContainer>  
+                                <strong>{product.name}</strong>{" "}
+                                {product.price}
+                                <span style={{color:"gray"}}>{product.author}</span>
+                                <Popup 
+                                    content='Adicionar ao carrinho'
+                                    trigger={
+                                    <Button
+                                        style={{width:"50%"}}
+                                        onClick={()=>{
+                                            setSelectedProducts([product.id, ...selectedProducts]);
+                                        }}
+                                        icon='cart'
+                                    />} 
+                                />
+                            </DescriptionContainer>
+                    </BookContainer>
+            )
+        }
+        </BookListContainer>
+    </>
     );
 }
