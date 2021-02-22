@@ -1,10 +1,11 @@
 import { BrowserRouter, NavLink, Route, Router, Switch } from "react-router-dom";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { BookContainer, BookListContainer, DescriptionContainer, Header } from  "./style.js";
-import { Dropdown, Image, Button, Popup } from "semantic-ui-react";
+import { Dimmer, Dropdown,  Image, Button, Popup, Loader } from "semantic-ui-react";
 import {Products} from "../../products.json";
+import { waitFor } from "@testing-library/dom";
 
 
 export const NavBar = () => { 
@@ -30,7 +31,7 @@ export const HomeScreen = () => {
         <>
             <NavBar/>
             <Switch>
-                <Route exact path="/"  render={()=><ProductList products={products}/>} />
+                <Route exact path="/"  render={()=><ProductList props={ products }/>} />
                 <Route exact path="/orders"  render={()=><div>Meus pedidos</div>}/>
                 <Route exact path="/user" render={()=><div>user</div>} />
             </Switch>
@@ -38,16 +39,40 @@ export const HomeScreen = () => {
     );
 }
 
-export const ProductList = ({ products }) => {
+export const ProductList = ({ props }) => {
 
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [selectedCategories, setselectedCategories] = useState([]);
+    const [products, setProducts] = useState([]);
 
     const handleItem = (item)=>{
         return(
             console.log(selectedProducts)   
         );
     }
+
+
+
+    useEffect(() => {
+        const retrieveProducts = () =>  {
+            if(selectedCategories && selectedCategories.length !== 0){
+                console.log("entrou no if");
+                
+                setProducts(
+                    Products.filter(
+                        product => selectedCategories.includes(product.category)
+                    )
+                )
+                console.log(selectedCategories);
+            }else{
+                setProducts(
+                    Products
+                )
+            }
+        };
+
+        retrieveProducts();
+    }, [selectedCategories])
     
     const options = [
         { key: 'angular', text: 'Angular', value: 'angular' },
@@ -69,12 +94,22 @@ export const ProductList = ({ products }) => {
         { key: 'ui', text: 'UI Design', value: 'ui' },
         { key: 'ux', text: 'User Experience', value: 'ux' },
       ]
-
+      console.log(products);
     return(
         <>
-            <Dropdown placeholder='Busca por Categorias' fluid multiple selection options={options} />
+            <Dropdown
+                placeholder='Busca por Categorias' 
+                onChange={ (e, { value }) =>{
+                    console.log(e)
+                    setselectedCategories([...selectedCategories, e.target.textContent]);
+                }} 
+                fluid 
+                multiple 
+                selection 
+                options={options} 
+            />
             <BookListContainer>
-                {products.map(
+                {products ? products.map(
                     product =>
                     <BookContainer>    
                             <Image 
@@ -99,6 +134,10 @@ export const ProductList = ({ products }) => {
                                 />
                             </DescriptionContainer>
                     </BookContainer>
+            ):(
+                <Dimmer active>
+                    <Loader />
+                </Dimmer>
             )
         }
         </BookListContainer>
