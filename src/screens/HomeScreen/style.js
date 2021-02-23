@@ -57,7 +57,7 @@ export const BookListContainer = styled.div`
         display: flex;
         flex-wrap:wrap;
         justify-content: center;
-        padding: 1rem;
+        margin: 2em;
         border: 1px solid black;
     }
 `;
@@ -75,5 +75,15 @@ export const BookContainer = styled.div`
         :hover{
             transform: scale(1.05);
         }
+    }
+`;
+
+export const AlignedDropdown = styled.div`
+    &&{
+        style=width: 100%;
+        display:flex;
+        justify-self: center;
+        margin:1em;
+        padding:1em;
     }
 `;

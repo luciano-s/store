@@ -1,12 +1,11 @@
-import { BrowserRouter, NavLink, Route, Router, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
-import { BookContainer, BookListContainer, DescriptionContainer, Header } from  "./style.js";
-import { Dimmer, Dropdown,  Image, Button, Popup, Loader } from "semantic-ui-react";
-import {Products} from "../../products.json";
-import { waitFor } from "@testing-library/dom";
-
+import { AlignedDropdown, BookContainer, BookListContainer, DescriptionContainer, Header } from  "./style.js";
+import { Button, Dimmer, Dropdown,  Image,  Loader, Popup } from "semantic-ui-react";
+import { Products } from "../../products.json";
+import { Orders } from "../Orders";
 
 export const NavBar = () => { 
     return (
@@ -26,49 +25,51 @@ export const NavBar = () => {
 
 export const HomeScreen = () => {
     const products = Products;
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    
+    const handleChange = product => {
+        if(selectedProducts.length > 0){
+            setSelectedProducts(
+                [
+                    ...selectedProducts.filter(
+                        selected => selected.id !== product.id
+                    ), product
+                ]
+            );
+        }
+        else {
+            setSelectedProducts([product]);
+        }
+    }
 
     return (
         <>
             <NavBar/>
             <Switch>
-                <Route exact path="/"  render={()=><ProductList props={ products }/>} />
-                <Route exact path="/orders"  render={()=><div>Meus pedidos</div>}/>
+                <Route exact path="/"  render={()=><ProductList onChange={handleChange} selectedProducts={ selectedProducts }/>} />
+                <Route exact path="/orders"  render={()=><Orders orders={selectedProducts}/>}/>
                 <Route exact path="/user" render={()=><div>user</div>} />
             </Switch>
         </>
     );
 }
 
-export const ProductList = ({ props }) => {
+export const ProductList = (props) => {
 
-    const [selectedProducts, setSelectedProducts] = useState([]);
     const [selectedCategories, setselectedCategories] = useState([]);
     const [products, setProducts] = useState([]);
-
-    const handleItem = (item)=>{
-        return(
-            console.log(selectedProducts)   
-        );
-    }
-
-
-
+    const [buttonEnabled, setButtonEnabled] = useState(true);
+    const [selectedButtons, setSelectedButtons] = useState([]);
+    
     useEffect(() => {
         const retrieveProducts = () =>  {
-            if(selectedCategories && selectedCategories.length !== 0){
-                console.log("entrou no if");
-                
+            (selectedCategories && selectedCategories.length !== 0) ?
                 setProducts(
                     Products.filter(
                         product => selectedCategories.includes(product.category)
                     )
-                )
-                console.log(selectedCategories);
-            }else{
-                setProducts(
-                    Products
-                )
-            }
+                ):
+                setProducts(Products)
         };
 
         retrieveProducts();
@@ -94,20 +95,20 @@ export const ProductList = ({ props }) => {
         { key: 'ui', text: 'UI Design', value: 'ui' },
         { key: 'ux', text: 'User Experience', value: 'ux' },
       ]
-      console.log(products);
     return(
         <>
-            <Dropdown
-                placeholder='Busca por Categorias' 
-                onChange={ (e, { value }) =>{
-                    console.log(e)
-                    setselectedCategories([...selectedCategories, e.target.textContent]);
-                }} 
-                fluid 
-                multiple 
-                selection 
-                options={options} 
-            />
+            <AlignedDropdown>
+                <Dropdown
+                    placeholder='Busca por Categorias' 
+                    onChange={ (e, { value }) =>{
+                        setselectedCategories([...selectedCategories, e.target.textContent]);
+                    }}
+                    fluid 
+                    multiple 
+                    selection 
+                    options={options} 
+                />
+            </AlignedDropdown>
             <BookListContainer>
                 {products ? products.map(
                     product =>
@@ -115,20 +116,24 @@ export const ProductList = ({ props }) => {
                             <Image 
                                 style={{cursor: "pointer", width: "13em", height: "15em"}} 
                                 src={product.img} 
-                                onClick={() => handleItem(product)} 
                             />     
                             <DescriptionContainer>  
                                 <strong>{product.name}</strong>{" "}
-                                {product.price}
+                                R${product.price}
                                 <span style={{color:"gray"}}>{product.author}</span>
                                 <Popup 
                                     content='Adicionar ao carrinho'
                                     trigger={
-                                    <Button
+                                    <Button 
+                                        key={product.id}
+                                        active={buttonEnabled}
                                         style={{width:"50%"}}
-                                        onClick={()=>{
-                                            setSelectedProducts([product.id, ...selectedProducts]);
-                                        }}
+                                        onClick={ () =>{
+                                            props.onChange(
+                                                product
+                                            );
+                                        }
+                                        }
                                         icon='cart'
                                     />} 
                                 />
