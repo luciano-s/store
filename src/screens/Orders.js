@@ -1,6 +1,6 @@
-import {BookContainer, MyOrders} from "../screens/HomeScreen/style";
+import {BookCartContainer, DescriptionContainer, MyOrders} from "../screens/HomeScreen/style";
 import { EmptyCartContainer } from "../screens/HomeScreen/style";
-import {Image} from "semantic-ui-react";
+import {Button, Image, Popup} from "semantic-ui-react";
 import React from "react";
 
 
@@ -15,13 +15,29 @@ export const Orders = ({ orders }) => {
 
     return(
         <MyOrders>
-            Meus produtos:
-            {orders.map(selected =>
-            (<div>
-                {selected.name}
-            </div>))}
-            <div>
-                total: R${total()}
+            <h1>Produtos Adicionados ao carrinho:</h1>
+            {orders.map(
+                order =>
+                    <BookCartContainer>
+                        <Image
+                            style={{cursor: "pointer", width: "13em", height: "15em"}}
+                            src={order.img}
+                        />
+                        <DescriptionContainer>
+                            <h2>{order.name}</h2>{" "}
+                            <h3>Preço: R${order.price}</h3>
+                        </DescriptionContainer>
+
+                    </BookCartContainer>
+            )
+            }
+            <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
+                <h3>Subtotal: <strong>R${total().toFixed(2)}</strong></h3>
+            </div>
+            <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
+            <Button >
+                Confirmar Compra
+            </Button>
             </div>
         </MyOrders>
     )

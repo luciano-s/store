@@ -108,3 +108,19 @@ export const EmptyCartContainer = styled.div`
     justify-content: center;
   }
 `;
+
+export const BookCartContainer = styled.div`
+  && {
+    display: flex;
+    align-items: center;
+    height: 20rem;
+    margin: 3em;
+    padding: 2em;
+    -moz-box-shadow: 1px 1px 1px 1px #999;
+    -webkit-box-shadow: 1px 1px 1px 1px #999;
+    box-shadow: 1px 1px 1px 1px #999;
+    
+    border-radius: 10px;
+    background: white;
+  }
+`;
