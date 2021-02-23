@@ -2,10 +2,19 @@ import { NavLink, Route, Switch } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
-import { AlignedDropdown, BookContainer, BookListContainer, DescriptionContainer, Header } from  "./style.js";
+import {
+    AlignedDropdown,
+    BookContainer,
+    BookListContainer,
+    DescriptionContainer,
+    Header,
+    HomeScreenContainer, StyledFooter
+} from "./style.js";
 import { Button, Dimmer, Dropdown,  Image,  Loader, Popup } from "semantic-ui-react";
-import { Products } from "../../products.json";
 import { Orders } from "../Orders";
+
+import { Products } from "../../products.json";
+import { Categories } from "../../categories.json";
 
 export const NavBar = () => { 
     return (
@@ -44,23 +53,24 @@ export const HomeScreen = () => {
 
     return (
         <>
-            <NavBar/>
-            <Switch>
-                <Route exact path="/"  render={()=><ProductList onChange={handleChange} selectedProducts={ selectedProducts }/>} />
-                <Route exact path="/orders"  render={()=><Orders orders={selectedProducts}/>}/>
-                <Route exact path="/user" render={()=><div>user</div>} />
-            </Switch>
+            <HomeScreenContainer>
+                <NavBar/>
+                <Switch>
+                    <Route exact path="/"  render={()=><ProductList onChange={handleChange} selectedProducts={ selectedProducts }/>} />
+                    <Route exact path="/orders"  render={()=><Orders orders={selectedProducts}/>}/>
+                    <Route exact path="/user" render={()=><div>user</div>} />
+                </Switch>
+            </HomeScreenContainer>
         </>
     );
 }
 
 export const ProductList = (props) => {
 
-    const [selectedCategories, setselectedCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [products, setProducts] = useState([]);
-    const [buttonEnabled, setButtonEnabled] = useState(true);
-    const [selectedButtons, setSelectedButtons] = useState([]);
-    
+    const categories = Categories;
+
     useEffect(() => {
         const retrieveProducts = () =>  {
             (selectedCategories && selectedCategories.length !== 0) ?
@@ -74,39 +84,20 @@ export const ProductList = (props) => {
 
         retrieveProducts();
     }, [selectedCategories])
-    
-    const options = [
-        { key: 'angular', text: 'Angular', value: 'angular' },
-        { key: 'css', text: 'CSS', value: 'css' },
-        { key: 'design', text: 'Graphic Design', value: 'design' },
-        { key: 'ember', text: 'Ember', value: 'ember' },
-        { key: 'html', text: 'HTML', value: 'html' },
-        { key: 'ia', text: 'Information Architecture', value: 'ia' },
-        { key: 'javascript', text: 'Javascript', value: 'javascript' },
-        { key: 'mech', text: 'Mechanical Engineering', value: 'mech' },
-        { key: 'meteor', text: 'Meteor', value: 'meteor' },
-        { key: 'node', text: 'NodeJS', value: 'node' },
-        { key: 'plumbing', text: 'Plumbing', value: 'plumbing' },
-        { key: 'python', text: 'Python', value: 'python' },
-        { key: 'rails', text: 'Rails', value: 'rails' },
-        { key: 'react', text: 'React', value: 'react' },
-        { key: 'repair', text: 'Kitchen Repair', value: 'repair' },
-        { key: 'ruby', text: 'Ruby', value: 'ruby' },
-        { key: 'ui', text: 'UI Design', value: 'ui' },
-        { key: 'ux', text: 'User Experience', value: 'ux' },
-      ]
+
     return(
         <>
             <AlignedDropdown>
                 <Dropdown
                     placeholder='Busca por Categorias' 
                     onChange={ (e, { value }) =>{
-                        setselectedCategories([...selectedCategories, e.target.textContent]);
+                        const withoutDuplicate = [...new Set([...selectedCategories, value])];
+                        setSelectedCategories(...withoutDuplicate);
                     }}
-                    fluid 
-                    multiple 
-                    selection 
-                    options={options} 
+                    fluid
+                    multiple
+                    selection
+                    options={categories}
                 />
             </AlignedDropdown>
             <BookListContainer>
@@ -126,7 +117,6 @@ export const ProductList = (props) => {
                                     trigger={
                                     <Button 
                                         key={product.id}
-                                        active={buttonEnabled}
                                         style={{width:"50%"}}
                                         onClick={ () =>{
                                             props.onChange(

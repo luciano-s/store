@@ -1,0 +1,27 @@
+{
+  "Categories":[
+    {
+      "key": "filosofia",
+      "text": "Filosofia",
+      "value": "filosofia"
+
+    },
+    {
+      "key": "literatura" ,
+      "text": "Literatura",
+      "value":"literatura"
+
+    },
+    {
+      "key": "sociologia",
+      "text": "Sociologia",
+      "value":"sociologia"
+
+    },
+    {
+      "key": "economia",
+      "text:": "Economia",
+      "value": "economia"
+    }
+  ]
+}
