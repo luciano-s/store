@@ -1,7 +1,7 @@
 {"Products":[
     {
         "id": "1",
-        "category":"Angular",
+        "category":"filosofia",
         "name":"A República",
         "price":"59.76",
         "author": "Platão",
@@ -19,7 +19,7 @@
     },
     {
         "id": "3",
-        "category":"",
+        "category":"sociologia",
         "name":"A sociedade industrial e seu futuro",
         "price":"46.00",
         "author":"Theodore J. Kaczynski",
@@ -37,7 +37,7 @@
     },
     {
         "id": "5",
-        "category":"",
+        "category":"filosofia",
         "name":"A Vida Intelectual",
         "price":"28.74",
         "author":"Antonin-Dalmace Sertillanges",
@@ -46,7 +46,7 @@
     },
     {
         "id": "6",
-        "category":"",
+        "category":"filosofia",
         "name":"Metafísica",
         "price":"62.30",
         "author":"Aristóteles",
@@ -55,7 +55,7 @@
     },
     {
         "id": "7",
-        "category":"",
+        "category":"filosofia",
         "name":"A República",
         "price":"59.76",
         "author": "Platão",
@@ -64,7 +64,7 @@
     },
     {
         "id": "8",
-        "category":"",
+        "category":"literatura",
         "name":"Cartas de um diabo a seu aprendiz",
         "price":"17.90",
         "author":"C. S. Lewis",
