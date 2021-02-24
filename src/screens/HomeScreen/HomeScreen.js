@@ -2,16 +2,19 @@ import { NavLink, Route, Switch } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
+import { Button, Dimmer, Dropdown,  Image,  Loader, Popup } from "semantic-ui-react";
+
+import { Orders } from "../Orders";
+import { BuyProducts } from "../BuyProducts/BuyProducts";
+
 import {
     AlignedDropdown,
     BookContainer,
     BookListContainer,
     DescriptionContainer,
     Header,
-    HomeScreenContainer, StyledFooter
+    HomeScreenContainer
 } from "./style.js";
-import { Button, Dimmer, Dropdown,  Image,  Loader, Popup } from "semantic-ui-react";
-import { Orders } from "../Orders";
 
 import { Products } from "../../products.json";
 import { Categories } from "../../categories.json";
@@ -59,6 +62,7 @@ export const HomeScreen = () => {
                     <Route exact path="/"  render={()=><ProductList onChange={handleChange} selectedProducts={ selectedProducts }/>} />
                     <Route exact path="/orders"  render={()=><Orders orders={selectedProducts}/>}/>
                     <Route exact path="/user" render={()=><div>user</div>} />
+                    <Route exact path="/buy" render={()=><BuyProducts/>} />
                 </Switch>
             </HomeScreenContainer>
         </>
