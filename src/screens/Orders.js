@@ -2,6 +2,7 @@ import {BookCartContainer, DescriptionContainer, MyOrders} from "../screens/Home
 import { EmptyCartContainer } from "../screens/HomeScreen/style";
 import {Button, Image, Popup} from "semantic-ui-react";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
 export const Orders = ({ orders }) => {
@@ -35,8 +36,8 @@ export const Orders = ({ orders }) => {
                 <h3>Subtotal: <strong>R${total().toFixed(2)}</strong></h3>
             </div>
             <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
-            <Button >
-                Confirmar Compra
+                <Button as={NavLink} to={"/buy"}>
+                Confirmar Pedido
             </Button>
             </div>
         </MyOrders>
