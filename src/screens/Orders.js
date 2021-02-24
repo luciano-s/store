@@ -37,7 +37,7 @@ export const Orders = ({ orders }) => {
             </div>
             <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
                 <Button as={NavLink} to={"/buy"}>
-                Confirmar Pedido
+                Confirmar Compra
             </Button>
             </div>
         </MyOrders>

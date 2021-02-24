@@ -39,7 +39,7 @@ export const BuyProducts = ({ products }) => {
               </div>
               { frete.shouldShow && (
                 <div style={{paddingTop:"1em"}}>
-                  <strong>Frete: {frete.value}</strong>
+                  <strong>Frete: R${frete.value}</strong>
                 </div>
               )
               }
