@@ -1,4 +1,4 @@
-import { NavLink, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, NavLink, Route, Switch} from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 
@@ -8,12 +8,12 @@ import { Orders } from "../Orders";
 import { BuyProducts } from "../BuyProducts/BuyProducts";
 
 import {
-    AlignedDropdown,
-    BookContainer,
-    BookListContainer,
-    DescriptionContainer,
-    Header,
-    HomeScreenContainer
+  AlignedDropdown,
+  BookContainer,
+  BookListContainer,
+  DescriptionContainer,
+  Header,
+  HomeScreenContainer, StyledFooter
 } from "./style.js";
 
 import { Products } from "../../products.json";
@@ -157,6 +157,9 @@ export const ProductList = (props) => {
             )
         }
         </BookListContainer>
-    </>
+          <StyledFooter>
+            Trabalho de WEB 2021 - Jediael Morais de Souza & Luciano Carlos Simeão Junior
+          </StyledFooter>
+        </>
     );
 }

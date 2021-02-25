@@ -1,6 +1,6 @@
-import {BookCartContainer, DescriptionContainer, MyOrders} from "../screens/HomeScreen/style";
+import {BookCartContainer, DescriptionContainer, MyOrders, StyledFooter} from "../screens/HomeScreen/style";
 import { EmptyCartContainer } from "../screens/HomeScreen/style";
-import {Button, Image, Popup} from "semantic-ui-react";
+import { Button, Image } from "semantic-ui-react";
 import React from "react";
 import {NavLink} from "react-router-dom";
 
@@ -14,6 +14,7 @@ export const Orders = ({ orders, handlePrice }) => {
 
 
     return(
+      <>
         <MyOrders>
             <h1>Produtos Adicionados ao carrinho:</h1>
             {orders.map(
@@ -42,6 +43,10 @@ export const Orders = ({ orders, handlePrice }) => {
               </Button>
             </div>
         </MyOrders>
+        <StyledFooter>
+          Trabalho de WEB 2021 - Jediael Morais de Souza & Luciano Carlos Simeão Junior
+        </StyledFooter>
+    </>
     )
 }
 const imageLocation = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fzero51carnes.com.br%2Fpub%2Fstatic%2Fversion1602093652%2Ffrontend%2FCiano%2FZero51Carnes%2Fpt_BR%2Fimages%2Fempty-shopping-cart-icon.png&f=1&nofb=1";

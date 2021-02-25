@@ -29,11 +29,10 @@ export const StyledFooter = styled.footer`
         color: #ccc;
         justify-content: center;
         align-items: center;
-        bottom: 0;
-        position: absolute;
         background: #444;
-        width:100vw;
-        height:15vh;
+        padding-top: 1em;
+        width: 100vw;
+        height: 100px;
     }
 `;
 
@@ -43,7 +42,8 @@ export const DescriptionContainer = styled.div`
         align-items: center;
         flex-direction: column;
         height:100px;
-        width: 100%
+        width: 100%;
+        background: white;
     }
 `;
 
