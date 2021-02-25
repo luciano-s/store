@@ -5,14 +5,13 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 
 
-export const Orders = ({ orders }) => {
-    console.log(orders);
+export const Orders = ({ orders, handlePrice }) => {
     const reducer = (accumulator, currentValue) => parseFloat(accumulator + parseFloat(currentValue.price));
 
-    const total = () =>{
-        return orders.reduce(reducer, 0)
-    }
     if(orders.length === 0) return <EmptyCart/>;
+
+    const totalCost = orders.reduce(reducer, 0);
+
 
     return(
         <MyOrders>
@@ -33,12 +32,14 @@ export const Orders = ({ orders }) => {
             )
             }
             <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
-                <h3>Subtotal: <strong>R${total().toFixed(2)}</strong></h3>
+                <h3>Subtotal: <strong>R${totalCost}</strong></h3>
             </div>
             <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
-                <Button as={NavLink} to={"/buy"}>
+              <Button as={NavLink} to={"/buy"} onClick={()=> {
+                handlePrice(totalCost.toFixed(2))
+              }}>
                 Confirmar Pedido
-            </Button>
+              </Button>
             </div>
         </MyOrders>
     )
