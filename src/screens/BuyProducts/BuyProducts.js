@@ -39,8 +39,8 @@ export const BuyProducts = ({ products, cost }) => {
                 <Button onClick={()=>setFrete({shouldShow: true, value: randomValue()})}>Calcular</Button>
               </div>
               { frete.shouldShow && (
-                <div style={{paddingTop:"1em"}}>
-                  <strong>Frete: R${frete.value}</strong>
+                <div style={{paddingTop:"1em", background:"white"}}>
+                  <strong style={{background:"white"}}>Frete: R${frete.value}</strong>
                 </div>
               )
               }
