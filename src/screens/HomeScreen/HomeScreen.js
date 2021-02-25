@@ -38,8 +38,9 @@ export const NavBar = () => {
 export const HomeScreen = () => {
     const products = Products;
     const [selectedProducts, setSelectedProducts] = useState([]);
-    
-    const handleChange = product => {
+    const [total, setTotal] = useState(0);
+
+    const handleChange = (product) => {
         if(selectedProducts.length > 0){
             setSelectedProducts(
                 [
@@ -54,15 +55,31 @@ export const HomeScreen = () => {
         }
     }
 
+    const handleTotalShopPrice = (price) => {
+
+      if (price !== undefined) setTotal(total + parseFloat(price));
+      console.log(total);
+    }
+
     return (
         <>
             <HomeScreenContainer>
                 <NavBar/>
                 <Switch>
-                    <Route exact path="/"  render={()=><ProductList onChange={handleChange} selectedProducts={ selectedProducts }/>} />
-                    <Route exact path="/orders"  render={()=><Orders orders={selectedProducts}/>}/>
-                    <Route exact path="/user" render={()=><div>user</div>} />
-                    <Route exact path="/buy" render={()=><BuyProducts/>} />
+                    <Route exact path="/"
+                      render={()=><ProductList onChange={handleChange}
+                      selectedProducts={ selectedProducts }/>}
+                    />
+                    <Route exact path="/orders"
+                      render={()=><Orders orders={selectedProducts}
+                      handlePrice={handleTotalShopPrice}/>}
+                    />
+                    <Route exact path="/user"
+                      render={()=><div>user</div>}
+                    />
+                    <Route exact path="/buy"
+                      render={()=><BuyProducts products={selectedProducts} cost={total}/>}
+                    />
                 </Switch>
             </HomeScreenContainer>
         </>
