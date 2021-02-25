@@ -4,18 +4,18 @@ import { BuyProductsContainer } from "./style";
 import { NavLink } from "react-router-dom";
 
 import { Button } from "semantic-ui-react";
-import {MyOrders} from "../HomeScreen/style";
 
-export const BuyProducts = ({ products }) => {
+
+export const BuyProducts = ({ products, cost }) => {
     const randomValue = () => {
       return (50*Math.random()).toFixed(2)
     }
     const calculateTotal = () => {
-      if (frete.value!==null) return 45 + frete.value;
-      return 45;
+      if (frete.value!==null) return cost + parseFloat(frete.value);
+      return cost;
     }
     const [frete, setFrete] = useState( {shouldShow:false, value:null})
-    console.log(frete);
+
     return (
     <>
         <BuyProductsContainer>
