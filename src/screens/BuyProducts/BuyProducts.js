@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BuyProductsContainer } from "./style";
 import { NavLink } from "react-router-dom";
 
-import { Button } from "semantic-ui-react";
+import {Button, Modal} from "semantic-ui-react";
 
 
 export const BuyProducts = ({ products, cost }) => {
@@ -15,7 +15,7 @@ export const BuyProducts = ({ products, cost }) => {
       return cost;
     }
     const [frete, setFrete] = useState( {shouldShow:false, value:null})
-
+    const modalMessage =  "Sua compra no valor de R$"+calculateTotal()+" foi realizada com sucesso!";
     return (
     <>
         <BuyProductsContainer>
@@ -49,9 +49,12 @@ export const BuyProducts = ({ products, cost }) => {
         <h3>Total da Compra: <strong>R${calculateTotal()}</strong></h3>
       </div>
         <div style={{textAlign:"right", marginBottom: "10px", marginRight:"40px"}}>
-          <Button as={NavLink} to={"/buy"}>
-            Confirmar Compra
-          </Button>
+          <Modal
+            trigger={<Button>Confirmar Compra</Button>}
+            header='Compra realizada com sucesso!'
+            content={modalMessage}
+            actions={[{ key: 'done', content: 'Ok', positive: true }]}
+          />
         </div>
     </>
 
