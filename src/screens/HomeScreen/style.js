@@ -43,7 +43,7 @@ export const DescriptionContainer = styled.div`
         flex-direction: column;
         height:100px;
         width: 100%;
-        background: white;
+        
     }
 `;
 
