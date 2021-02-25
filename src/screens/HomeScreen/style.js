@@ -43,6 +43,17 @@ export const DescriptionContainer = styled.div`
         flex-direction: column;
         height:100px;
         width: 100%;
+        background: whitesmoke;
+    }
+`;
+
+export const DescriptionContainerHome = styled.div`
+    &&{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height:100px;
+        width: 100%;
         background: white;
     }
 `;

@@ -1,4 +1,9 @@
-import {BookCartContainer, DescriptionContainer, MyOrders, StyledFooter} from "../screens/HomeScreen/style";
+import {
+  BookCartContainer,
+  DescriptionContainerHome,
+  MyOrders,
+  StyledFooter
+} from "../screens/HomeScreen/style";
 import { EmptyCartContainer } from "../screens/HomeScreen/style";
 import { Button, Image } from "semantic-ui-react";
 import React from "react";
@@ -24,10 +29,10 @@ export const Orders = ({ orders, handlePrice }) => {
                             style={{cursor: "pointer", width: "13em", height: "15em"}}
                             src={order.img}
                         />
-                        <DescriptionContainer>
-                            <h2>{order.name}</h2>{" "}
-                            <h3>Preço: R${order.price}</h3>
-                        </DescriptionContainer>
+                        <DescriptionContainerHome>
+                            <h2 style={{background:"white"}}>{order.name}</h2>{" "}
+                            <h3 style={{background:"white"}}>Preço: R${order.price}</h3>
+                        </DescriptionContainerHome>
 
                     </BookCartContainer>
             )
